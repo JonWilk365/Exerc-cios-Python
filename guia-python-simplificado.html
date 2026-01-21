@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Python Simplificado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            padding: 60px;
+            min-height: 900px;
+            page-break-after: always;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #3776ab;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(55,118,171,0.3);
+            z-index: 1000;
+        }
+
+        .download-btn:hover {
+            background: #2b5d87;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            color: #3776ab;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #ffd43b;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #3776ab;
+            font-size: 2.2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #ffd43b;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #3776ab;
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #2b5d87;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            color: #333;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .cover h1 {
+            color: white;
+            font-size: 4em;
+            border: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cover .subtitle {
+            font-size: 1.8em;
+            margin-top: 20px;
+            opacity: 0.95;
+        }
+
+        .cover .icon {
+            font-size: 10em;
+            margin-bottom: 40px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            font-size: 0.95em;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid #3776ab;
+        }
+
+        .tip-box {
+            background: #e7f3ff;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .important-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        strong {
+            color: #3776ab;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #3776ab;
+            color: white;
+            font-weight: 600;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .toc li:last-child {
+            border-bottom: none;
+        }
+
+        @media print {
+            .download-btn {
+                display: none;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="window.print()">📥 Baixar PDF</button>
+
+    <div class="container">
+        <!-- CAPA -->
+        <div class="page cover">
+            <div class="icon">🐍</div>
+            <h1>Guia Python Simplificado</h1>
+            <div class="subtitle">Tutorial Completo da Documentação Oficial</div>
+            <p style="margin-top: 40px; font-size: 1.2em;">Baseado no Tutorial Oficial Python 3.14</p>
+            <p style="margin-top: 20px; font-size: 1em; opacity: 0.9;">Linguagem clara e acessível para todos</p>
+        </div>
+
+        <!-- ÍNDICE -->
+        <div class="page">
+            <h1>Índice</h1>
+            <div class="toc">
+                <ul>
+                    <li><strong>1.</strong> Abrindo Seu Apetite</li>
+                    <li><strong>2.</strong> Utilizando o Interpretador Python</li>
+                    <li><strong>3.</strong> Uma Introdução Informal ao Python</li>
+                    <li><strong>4.</strong> Mais Ferramentas de Controle de Fluxo</li>
+                    <li><strong>5.</strong> Estruturas de Dados</li>
+                    <li><strong>6.</strong> Módulos</li>
+                    <li><strong>7.</strong> Entrada e Saída</li>
+                    <li><strong>8.</strong> Erros e Exceções</li>
+                    <li><strong>9.</strong> Classes</li>
+                    <li><strong>10.</strong> Um Breve Passeio pela Biblioteca Padrão</li>
+                    <li><strong>11.</strong> Um Breve Passeio pela Biblioteca Padrão - Parte II</li>
+                    <li><strong>12.</strong> Ambientes Virtuais e Pacotes</li>
+                    <li><strong>13.</strong> E Agora?</li>
+                    <li><strong>14.</strong> Edição de Entrada Interativa</li>
+                    <li><strong>15.</strong> Aritmética de Ponto Flutuante</li>
+                    <li><strong>16.</strong> Anexo</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CAPÍTULO 1 -->
+        <div class="page">
+            <h1>1. Abrindo Seu Apetite</h1>
+            
+            <h3>Por que Python?</h3>
+            <p>Python é uma linguagem de programação poderosa e fácil de aprender. Se você já sabe programar em outra linguagem, vai achar Python refrescante. Se está começando agora, vai adorar sua simplicidade!</p>
+
+            <div class="important-box">
+                <strong>📌 Para quem é este guia:</strong>
+                <p>Este tutorial é para pessoas que <strong>já programam</strong> mas são novas em Python. Não é para iniciantes absolutos em programação.</p>
+            </div>
+
+            <h3>O que Torna Python Especial?</h3>
+            <ul>
+                <li><strong>Sintaxe elegante:</strong> Código limpo e fácil de ler</li>
+                <li><strong>Tipagem dinâmica:</strong> Não precisa declarar tipos de variáveis</li>
+                <li><strong>Interpretada:</strong> Roda o código diretamente, sem compilar</li>
+                <li><strong>Biblioteca gigante:</strong> Tem ferramentas prontas para quase tudo</li>
+                <li><strong>Gratuita e open-source:</strong> Use como quiser, onde quiser</li>
+            </ul>
+
+            <h3>Onde Python Brilha?</h3>
+            <ul>
+                <li>Desenvolvimento web (Django, Flask)</li>
+                <li>Data Science e Machine Learning</li>
+                <li>Automação de tarefas</li>
+                <li>Criação de scripts rápidos</li>
+                <li>Desenvolvimento de jogos</li>
+                <li>Aplicações científicas</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong>💡 Dica:</strong> Python é perfeito tanto para projetos pequenos quanto grandes. Instagram, YouTube e Netflix usam Python em produção!
+            </div>
+        </div>
+
+        <!-- CAPÍTULO 2 -->
+        <div class="page">
+            <h1>2. Utilizando o Interpretador Python</h1>
+            
+            <h2>2.1. Chamando o Interpretador</h2>
+            
+            <p>O interpretador Python é o programa que executa seu código. Pense nele como um tradutor instantâneo: você escreve em Python, ele traduz para linguagem de máquina.</p>
+
+            <h3>Como Abrir o Interpretador</h3>
+            <p>No terminal (Linux/Mac) ou Prompt de Comando (Windows), digite:</p>
+            <div class="code-block">
+python3
+# ou apenas
+python
+            </div>
+
+            <p>Você verá algo assim:</p>
+            <div class="code-block">
+Python 3.14.2 (main, Jan 2025)
+>>> 
+            </div>
+
+            <p>O símbolo <code>>>></code> significa que o Python está esperando seu comando!</p>
+
+            <h4>2.1.1. Passagem de Argumentos</h4>
+            <p>Você pode passar informações para um script Python diretamente pela linha de comando:</p>
+            <div class="code-block">
+python meu_script.py argumento1 argumento2
+            </div>
+
+            <p>Dentro do script, você acessa esses argumentos usando o módulo <code>sys</code>:</p>
+            <div class="code-block">
+import sys
+print(sys.argv)  # Lista com todos os argumentos
+            </div>
+
+            <h4>2.1.2. Modo Interativo</h4>
+            <p>É quando você digita comandos Python um por um e vê o resultado imediatamente. Perfeito para testar ideias rápidas!</p>
+
+            <div class="code-block">
+>>> 2 + 2
+4
+>>> nome = "Python"
+>>> print(f"Olá, {nome}!")
+Olá, Python!
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Dica:</strong> Use <code>exit()</code> ou <code>Ctrl+D</code> (Linux/Mac) / <code>Ctrl+Z</code> (Windows) para sair do modo interativo.
+            </div>
+
+            <h2>2.2. O Interpretador e Seu Ambiente</h2>
+
+            <h4>2.2.1. Edição de Código-Fonte</h4>
+            <p>Por padrão, arquivos Python são salvos com codificação <strong>UTF-8</strong>, que suporta caracteres especiais e acentuação.</p>
+
+            <p>Para declarar uma codificação diferente, coloque isso na primeira linha do arquivo:</p>
+            <div class="code-block">
+# -*- coding: latin-1 -*-
+            </div>
+
+            <div class="important-box">
+                <strong>📌 Boa prática:</strong> Sempre use UTF-8. É o padrão moderno e funciona em qualquer lugar!
+            </div>
+        </div>
+
+        <!-- CAPÍTULO 3 -->
+        <div class="page">
+            <h1>3. Uma Introdução Informal ao Python</h1>
+            
+            <h2>3.1. Usando Python Como Uma Calculadora</h2>
+            
+            <p>Vamos começar simples! Python pode ser usado como uma calculadora poderosa.</p>
+
+            <h3>3.1.1. Números</h3>
+            
+            <p>Operações básicas funcionam exatamente como você esperaria:</p>
+            <div class="code-block">
+>>> 2 + 2
+4
+>>> 50 - 5*6
+20
+>>> (50 - 5*6) / 4
+5.0
+>>> 8 / 5  # Divisão sempre retorna número decimal
+1.6
+            </div>
+
+            <div class="important-box">
+                <strong>Tipos de números em Python:</strong>
+                <ul>
+                    <li><code>int</code> - Inteiros: <code>2, 100, -50</code></li>
+                    <li><code>float</code> - Decimais: <code>3.14, -0.5, 2.0</code></li>
+                    <li><code>complex</code> - Complexos: <code>3+5j</code></li>
+                </ul>
+            </div>
+
+            <p>Operadores especiais:</p>
+            <div class="code-block">
+>>> 17 // 3  # Divisão inteira (ignora resto)
+5
+>>> 17 % 3   # Módulo (retorna o resto)
+2
+>>> 2 ** 3   # Potenciação (2 elevado a 3)
+8
+            </div>
+
+            <p>Variáveis guardam valores:</p>
+            <div class="code-block">
+>>> largura = 20
+>>> altura = 5 * 9
+>>> largura * altura
+900
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Variável especial <code>_</code>:</strong> No modo interativo, <code>_</code> armazena o último resultado calculado!
+                <div class="code-block" style="margin-top: 10px;">
+>>> impostos = 12.5 / 100
+>>> preco = 100.50
+>>> preco * impostos
+12.5625
+>>> preco + _  # Usa o resultado anterior
+113.0625
+                </div>
+            </div>
+
+            <h3>3.1.2. Texto (Strings)</h3>
+            
+            <p>Texto em Python é chamado de <strong>string</strong>. Você pode usar aspas simples ou duplas:</p>
+            <div class="code-block">
+>>> 'spam eggs'  # Aspas simples
+'spam eggs'
+>>> "não é"      # Aspas duplas
+'não é'
+>>> "Ele disse 'Olá!'"  # Misturando aspas
+"Ele disse 'Olá!'"
+            </div>
+
+            <p>Para textos longos com múltiplas linhas, use aspas triplas:</p>
+            <div class="code-block">
+>>> texto = """
+... Linha 1
+... Linha 2
+... Linha 3
+... """
+>>> print(texto)
+
+Linha 1
+Linha 2
+Linha 3
+            </div>
+
+            <p><strong>Concatenação</strong> (juntar strings):</p>
+            <div class="code-block">
+>>> 'Py' + 'thon'
+'Python'
+>>> 'Py' * 3
+'PyPyPy'
+>>> prefixo = 'Py'
+>>> prefixo + 'thon'
+'Python'
+            </div>
+
+            <p><strong>Indexação</strong> (acessar caracteres):</p>
+            <div class="code-block">
+>>> palavra = 'Python'
+>>> palavra[0]  # Primeiro caractere
+'P'
+>>> palavra[5]  # Último caractere
+'n'
+>>> palavra[-1] # Último caractere (jeito alternativo)
+'n'
+>>> palavra[-2] # Penúltimo caractere
+'o'
+            </div>
+
+            <p><strong>Fatiamento</strong> (slicing - pegar pedaços):</p>
+            <div class="code-block">
+>>> palavra = 'Python'
+>>> palavra[0:2]  # Caracteres da posição 0 até 2 (não inclui 2)
+'Py'
+>>> palavra[2:5]  # Caracteres da posição 2 até 5
+'tho'
+>>> palavra[:2]   # Do início até posição 2
+'Py'
+>>> palavra[4:]   # Da posição 4 até o fim
+'on'
+>>> palavra[-2:]  # Últimos 2 caracteres
+'on'
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Importante:</strong> Strings em Python são <strong>imutáveis</strong>! Você não pode mudar um caractere individual:
+                <div class="code-block" style="margin-top: 10px;">
+>>> palavra[0] = 'J'  # Isso dá erro!
+TypeError: 'str' object does not support item assignment
+                </div>
+                <p>Para "mudar" uma string, você precisa criar uma nova:</p>
+                <div class="code-block" style="margin-top: 10px;">
+>>> 'J' + palavra[1:]
+'Jython'
+                </div>
+            </div>
+
+            <p>Função útil <code>len()</code> - retorna o tamanho:</p>
+            <div class="code-block">
+>>> s = 'supercalifragilistico'
+>>> len(s)
+21
+            </div>
+        </div>
+
+        <!-- Continua nos próximos slides... -->
+        <div class="page">
+            <h3>3.1.3. Listas</h3>
+            
+            <p>Listas são coleções de itens. Diferente de strings, listas são <strong>mutáveis</strong> (podem ser alteradas)!</p>
+
+            <div class="code-block">
+>>> quadrados = [1, 4, 9, 16, 25]
+>>> quadrados
+[1, 4, 9, 16, 25]
+            </div>
+
+            <p>Acessando elementos (funciona igual strings):</p>
+            <div class="code-block">
+>>> quadrados[0]  # Primeiro elemento
+1
+>>> quadrados[-1] # Último elemento
+25
+>>> quadrados[-3:] # Últimos 3 elementos
+[9, 16, 25]
+            </div>
+
+            <p>Listas podem ser concatenadas:</p>
+            <div class="code-block">
+>>> quadrados + [36, 49, 64, 81, 100]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+            </div>
+
+            <p><strong>Modificando listas</strong> (aqui está a diferença!):</p>
+            <div class="code-block">
+>>> cubos = [1, 8, 27, 65, 125]  # Ops, 65 está errado!
+>>> cubos[3] = 64                 # Corrigindo
+>>> cubos
+[1, 8, 27, 64, 125]
+            </div>
+
+            <p>Adicionando elementos no final:</p>
+            <div class="code-block">
+>>> cubos.append(216)  # Adiciona 6³
+>>> cubos.append(343)  # Adiciona 7³
+>>> cubos
+[1, 8, 27, 64, 125, 216, 343]
+            </div>
+
+            <p>Atribuição para fatias (substituindo partes da lista):</p>
+            <div class="code-block">
+>>> letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> letras[2:5] = ['C', 'D', 'E']  # Substitui
+>>> letras
+['a', 'b', 'C', 'D', 'E', 'f', 'g']
+>>> letras[2:5] = []  # Remove elementos
+>>> letras
+['a', 'b', 'f', 'g']
+            </div>
+
+            <p>Limpando a lista toda:</p>
+            <div class="code-block">
+>>> letras[:] = []
+>>> letras
+[]
+            </div>
+
+            <p>Função <code>len()</code> também funciona em listas:</p>
+            <div class="code-block">
+>>> letras = ['a', 'b', 'c', 'd']
+>>> len(letras)
+4
+            </div>
+
+            <p><strong>Listas aninhadas</strong> (lista dentro de lista):</p>
+            <div class="code-block">
+>>> a = ['a', 'b', 'c']
+>>> n = [1, 2, 3]
+>>> x = [a, n]
+>>> x
+[['a', 'b', 'c'], [1, 2, 3]]
+>>> x[0]
+['a', 'b', 'c']
+>>> x[0][1]
+'b'
+            </div>
+
+            <h2>3.2. Primeiros Passos para a Programação</h2>
+            
+            <p>Vamos criar algo mais interessante: uma sequência de Fibonacci!</p>
+
+            <div class="tip-box">
+                <strong>📖 Fibonacci:</strong> Cada número é a soma dos dois anteriores: 0, 1, 1, 2, 3, 5, 8, 13...
+            </div>
+
+            <div class="code-block">
+>>> # Sequência de Fibonacci até 10
+>>> a, b = 0, 1  # Atribuição múltipla!
+>>> while a < 10:
+...     print(a)
+...     a, b = b, a+b
+...
+0
+1
+1
+2
+3
+5
+8
+            </div>
+
+            <div class="important-box">
+                <strong>📌 Conceitos importantes deste exemplo:</strong>
+                <ul>
+                    <li><strong>Atribuição múltipla:</strong> <code>a, b = 0, 1</code> atribui 0 para a e 1 para b</li>
+                    <li><strong>Loop while:</strong> Repete enquanto a condição for verdadeira</li>
+                    <li><strong>Indentação:</strong> Os espaços antes de <code>print</code> e <code>a, b = ...</code> são obrigatórios!</li>
+                    <li><strong>print():</strong> Exibe valores na tela</li>
+                </ul>
+            </div>
+
+            <p>A comparação <code>a < 10</code> é verdadeira enquanto <code>a</code> for menor que 10.</p>
+
+            <p>Outros operadores de comparação:</p>
+            <ul>
+                <li><code>==</code> igual</li>
+                <li><code>!=</code> diferente</li>
+                <li><code><</code> menor</li>
+                <li><code>></code> maior</li>
+                <li><code><=</code> menor ou igual</li>
+                <li><code>>=</code> maior ou igual</li>
+            </ul>
+        </div>
+
+        <!-- CAPÍTULO 4 - Parte 1 -->
+        <div class="page">
+            <h1>4. Mais Ferramentas de Controle de Fluxo</h1>
+            
+            <h2>4.1. Instruções <code>if</code></h2>
+            
+            <p>O <code>if</code> permite tomar decisões no código:</p>
+
+            <div class="code-block">
+>>> x = int(input("Digite um número: "))
+Digite um número: 42
+>>> if x < 0:
+...     print('Negativo')
+... elif x == 0:
+...     print('Zero')
+... elif x == 1:
+...     print('Um')
+... else:
+...     print('Maior que um')
+...
+Maior que um
+            </div>
+
+            <div class="important-box">
+                <strong>📌 Estrutura do if:</strong>
+                <ul>
+                    <li><code>if</code> - Primeira condição</li>
+                    <li><code>elif</code> - Condições adicionais (opcional, quantas quiser)</li>
+                    <li><code>else</code> - Se nenhuma condição for verdadeira (opcional)</li>
+                </ul>
+            </div>
+
+            <h2>4.2. Instruções <code>for</code></h2>
+            
+            <p>O <code>for</code> repete ações para cada item de uma sequência:</p>
+
+            <div class="code-block">
+>>> # Percorrendo uma lista
+>>> palavras = ['gato', 'janela', 'defenestrar']
+>>> for palavra in palavras:
+...     print(palavra, len(palavra))
+...
+gato 4
+janela 6
+defenestrar 11
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Cuidado:</strong> Não modifique a lista enquanto itera sobre ela! Isso pode causar bugs. Se precisar modificar, crie uma cópia:
+                <div class="code-block" style="margin-top: 10px;">
+>>> for usuario in usuarios.copy():  # Itera sobre uma cópia
+...     if usuario['ativo'] == False:
+...         usuarios.remove(usuario)  # Remove da lista original
+                </div>
+            </div>
+
+            <h2>4.3. A Função <code>range()</code></h2>
+            
+            <p><code>range()</code> gera sequências de números. Muito útil para loops!</p>
+
+            <div class="code-block">
+>>> for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+            </div>
+
+            <p>Você pode definir início, fim e passo:</p>
+
+            <div class="code-block">
+>>> list(range(5, 10))  # De 5 até 9
+[5, 6, 7, 8, 9]
+
+>>> list(range(0, 10, 3))  # De 0 até 9, pulando de 3 em 3
+[0, 3, 6, 9]
+
+>>> list(range(-10, -100, -30))  # Negativo
+[-10, -40, -70]
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Dica:</strong> Combine <code>range()</code> com <code>len()</code> para iterar com índices:
+                <div class="code-block" style="margin-top: 10px;">
+>>> a = ['Mary', 'tinha', 'um', 'cordeirinho']
+>>> for i in range(len(a)):
+...     print(i, a[i])
+...
+0 Mary
+1 tinha
+2 um
+3 cordeirinho
+                </div>
+            </div>
+
+            <h2>4.4. Instruções <code>break</code> e <code>continue</code></h2>
+            
+            <p><code>break</code> sai do loop completamente:</p>
+
+            <div class="code-block">
+>>> for n in range(2, 10):
+...     for x in range(2, n):
+...         if n % x == 0:
+...             print(n, 'é', x, '*', n//x)
+...             break  # Sai do loop interno
+...     else:
+...         print(n, 'é primo')
+...
+2 é primo
+3 é primo
+4 é 2 * 2
+5 é primo
+6 é 2 * 3
+7 é primo
+8 é 2 * 4
+9 é 3 * 3
+            </div>
+
+            <p><code>continue</code> pula para a próxima iteração:</p>
+
+            <div class="code-block">
+>>> for num in range(2, 10):
+...     if num % 2 == 0:
+...         print("Par:", num)
+...         continue  # Pula o resto do loop
+...     print("Ímpar:", num)
+...
+Par: 2
+Ímpar: 3
+Par: 4
+Ímpar: 5
+Par: 6
+Ímpar: 7
+Par: 8

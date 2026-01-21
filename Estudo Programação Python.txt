@@ -1,0 +1,6 @@
+Estudo Programação Python
+
+16/01/2026
+-Parei no tópico 4 da documentação python
+-Li 20 cartões sobre Python no Notebook LM
+-Parei no exercício 4 da lista de Python
